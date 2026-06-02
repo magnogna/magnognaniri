@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 # image will be published to ghcr.io/<user>/<name>
 name: magnognaniri
@@ -6,8 +5,8 @@ name: magnognaniri
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 42 # latest is also supported if you want new updates ASAP
+base-image: quay.io/fedora/fedora-sway-atomic
+image-version: latest # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -18,17 +17,23 @@ modules:
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
   - type: dnf
-    repos:
-      copr:
-        - atim/starship
     install:
-      packages:
+      packages:   
+      #utils
         - micro
-        - starship
+        - lshw
+      #shell
+        - zsh
+        - zsh-autosuggestions
+      #build
+        - make
+        - gawk
+      #appimages
+        - fuse
+        - fuse-libs
+        
     remove:
       packages:
-        # example: removing firefox (in favor of the flatpak)
-        # "firefox" is the main package, "firefox-langpacks" is a dependency
         - firefox
         - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
 
@@ -38,8 +43,17 @@ modules:
         scope: system
         # If no repo information is specified, Flathub will be used by default
         install: # system flatpaks we want all users to have and not remove
-          - org.mozilla.firefox
-          - org.gnome.Loupe
-      - scope: user # Also add Flathub user repo, but no user packages
+          - app.zen_browser.zen 
+          - page.codeberg.libre_menu_editor.LibreMenuEditor 
+          - org.onlyoffice.desktopeditors
+          - com.mattjakeman.ExtensionManager
+          - io.github.kolunmi.Bazaar
+          - com.github.tchx84.Flatseal
 
+  ## - type: script
+  ##  snippets:
+  ##    - "gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true" #enable middleclick paste
+  ##  scripts:
+  ##   - ble.sh
+  
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
