@@ -17,16 +17,6 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
-##ublue-os/packages
-  - type: dnf
-    repos:
-      copr:
-        - ublue-os/packages
-    install:
-      packages:   
-        - bazaar
-        - uupd
- 
   - type: dnf
     install:
       packages:   
