@@ -6,7 +6,7 @@ name: magnognaniri
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: quay.io/fedora/fedora-sway-atomic
+base-image: quay.io/rakuos/rakuos-cosmic
 image-version: 44 # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
@@ -17,24 +17,6 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
-  - type: dnf
-    install:
-      packages:   
-      #utils
-        - micro
-        - lshw
-      #build
-        - make
-        - gawk
-      #appimages
-        - fuse
-        - fuse-libs
-        
-    remove:
-      packages:
-        - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-
   - type: default-flatpaks
     configurations:
       - notify: true # Send notification after install/uninstall is finished (true/false)
@@ -44,8 +26,6 @@ modules:
           - app.zen_browser.zen 
           - page.codeberg.libre_menu_editor.LibreMenuEditor 
           - org.onlyoffice.desktopeditors
-          - com.mattjakeman.ExtensionManager
-          - io.github.kolunmi.Bazaar
           - com.github.tchx84.Flatseal
 
   ## - type: script
