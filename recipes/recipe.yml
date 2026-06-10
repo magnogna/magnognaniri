@@ -71,12 +71,29 @@ modules:
           - com.mattjakeman.ExtensionManager
           - io.github.kolunmi.Bazaar
           - com.github.tchx84.Flatseal
+          - be.alexandervanhee.gradia
+          - ca.edestcroix.Recordbox
+          - com.parsecgaming.parsec
+          - com.valvesoftware.SteamLink
+          - de.haeckerfelix.Fragments
+          - de.haeckerfelix.Shortwave
+          - io.anytype.anytype
+          - io.github.diegopvlk.Cine
+          - io.github.dubstar_04.design
+          - it.mijorus.gearlever
+          - net.codelogistics.webapps
+          - org.chromium.Chromium
+          - org.fedoraproject.MediaWriter
+          - org.gnome.Builder
+          - org.gnome.SimpleScan
+          - org.gnome.TextEditor
+          - org.gnome.World.PikaBackub
 
   - type: systemd
     system:
       enabled:
       - cockpit.socket
-      - dsearch
+      - dsearch.service
 
   - type: script
     snippets:
