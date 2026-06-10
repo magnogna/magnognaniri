@@ -80,9 +80,11 @@ modules:
     system:
       enabled:
       - cockpit.socket
+      - dsearch
 
-  ## - type: script
-  ##  snippets:
+  - type: script
+    snippets:
+      - "dms greeter enable"
   ##    - "gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true" #enable middleclick paste
   ##  scripts:
   ##   - ble.sh
