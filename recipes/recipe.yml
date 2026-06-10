@@ -12,17 +12,33 @@ image-version: 44 # latest is also supported if you want new updates ASAP
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
-- type: files
-files:
-- source: system
-destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
-
+  - type: files
+    files:
+      - source: system
+        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+  - type: dnf
+    repos:
+      copr:
+        - avengemedia/dms
+    install:
+      packages:  
+      #niri
+        - niri
+        - dms
+        - niri-settings
+        
   - type: dnf
     install:
-      packages:   
+      packages:  
+      #niri
+        - niri
+        - niri-settings
       #utils
         - micro
         - lshw
+        - fish
+        - cockpit
+        - cockpit-podman
       #build
         - make
         - gawk
@@ -30,28 +46,33 @@ destination: / # copies files/system/* (* means everything inside it) into your 
         - fuse
         - fuse-libs
         
-    remove:
-      packages:
-        - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+#    remove:
+#      packages:
+#        - firefox
+#        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
 
-- type: default-flatpaks
-configurations:
-- notify: true # Send notification after install/uninstall is finished (true/false)
-scope: system
-# If no repo information is specified, Flathub will be used by default
-install: # system flatpaks we want all users to have and not remove
-- app.zen_browser.zen 
-- page.codeberg.libre_menu_editor.LibreMenuEditor 
-- org.onlyoffice.desktopeditors
+  - type: default-flatpaks
+    configurations:
+      - notify: true # Send notification after install/uninstall is finished (true/false)
+        scope: system
+        # If no repo information is specified, Flathub will be used by default
+        install: # system flatpaks we want all users to have and not remove
+          - app.zen_browser.zen 
+          - page.codeberg.libre_menu_editor.LibreMenuEditor 
+          - org.onlyoffice.desktopeditors
           - com.mattjakeman.ExtensionManager
           - io.github.kolunmi.Bazaar
-- com.github.tchx84.Flatseal
+          - com.github.tchx84.Flatseal
 
-## - type: script
-##  snippets:
-##    - "gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true" #enable middleclick paste
-##  scripts:
-##   - ble.sh
+  - type: systemd
+    system:
+      enabled:
+      - cockpit.socket
 
-- type: signing # this sets up the proper policy & signing files for signed images to work fully
+  ## - type: script
+  ##  snippets:
+  ##    - "gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true" #enable middleclick paste
+  ##  scripts:
+  ##   - ble.sh
+  
+  - type: signing # this sets up the proper policy & signing files for signed images to work fully
