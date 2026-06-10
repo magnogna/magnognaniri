@@ -82,7 +82,7 @@ modules:
 
   - type: script
     snippets:
-      - "dms greeter enable"
+      - "/usr/bin/dms greeter enable"
   ##    - "gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true" #enable middleclick paste
   ##  scripts:
   ##   - ble.sh
