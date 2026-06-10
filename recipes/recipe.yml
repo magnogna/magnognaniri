@@ -27,7 +27,6 @@ modules:
       #niri
         - niri
         - dms
-        - niri-settings
         - dms-greeter
         - material-symbols-fonts
         - danksearch
