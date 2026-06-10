@@ -76,6 +76,8 @@ modules:
     system:
       enabled:
       - cockpit.socket
+    user:
+      enabled:
       - dsearch.service
 
   - type: script
