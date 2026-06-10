@@ -37,7 +37,7 @@ modules:
         - dgop
         - dsearch
         - matugen
-        - qt6-multimedia
+        - qt6-qtmultimedia
         
   - type: dnf
     install:
