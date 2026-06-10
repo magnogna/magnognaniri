@@ -79,12 +79,5 @@ modules:
     user:
       enabled:
       - dsearch.service
-
-  - type: script
-    snippets:
-      - "/usr/bin/dms greeter enable"
-  ##    - "gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true" #enable middleclick paste
-  ##  scripts:
-  ##   - ble.sh
-  
+ 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
